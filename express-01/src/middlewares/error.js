@@ -13,7 +13,7 @@ const errorMiddleware = (err, req, res, next) => {
     return res.status(err.statusCode).send({
       status: err.status,
       message: err.message,
-      ...(isDev && { stack: err.stack }),
+      ...(isDev && err.statusCode !== 429 && { stack: err.stack }),
     });
   }
 
